@@ -95,12 +95,12 @@ with cols[0]:
     )
     board = chess.Board(st.session_state.curfen)
     outcome = board.outcome()
-    st.warning(f'is_check: {board.is_check()}')
-    st.warning(f'is_checkmate: {board.is_checkmate()}')
-    st.warning(f'is_stalemate: {board.is_stalemate()}')
-    st.warning(f'is_insufficient_material: {board.is_insufficient_material()}')
-    if outcome:
-        st.warning(f"Winner: { {True:'White',False:'Black'}.get(outcome.winner) }")
+    # st.warning(f'is_check: {board.is_check()}')
+    # st.warning(f'is_checkmate: {board.is_checkmate()}')
+    # st.warning(f'is_stalemate: {board.is_stalemate()}')
+    # st.warning(f'is_insufficient_material: {board.is_insufficient_material()}')
+    # if outcome:
+    #     st.warning(f"Winner: { {True:'White',False:'Black'}.get(outcome.winner) }")
 
 with cols[1]:
     with st.container():
