@@ -63,6 +63,15 @@ st.session_state.board_width = 500
 # The move contains the from sq, to square, and others.
 data = bridge("my-bridge")
 
+if not st.session_state.get('current_player') or st.session_state['current_player'] == 'Player 2':
+    st.session_state['current_player'] = 'Player 1'
+else:
+    st.session_state['current_player'] = 'Player 2'
+
+if st.button('start new game'):
+    puzzle = None
+    data = None
+
 if data is not None:
     st.session_state.lastfen = st.session_state.curfen
     st.session_state.curfen = data['fen']
@@ -75,18 +84,17 @@ if data is not None:
                 'last_fen':st.session_state.lastfen,
                 'last_move':data['pgn'],
                 'data': None,
-                'timestamp': str(dt.datetime.now()) 
+                'timestamp': str(dt.datetime.now()),
+                "current_player": st.session_state.current_player
             }
         }
     )
 
-if st.button('start new game'):
-    puzzle = None
-    data = None
 
-cols = st.columns([1, 1])
+cols = st.columns([1, 2.5, 2])
 
-with cols[0]:
+
+with cols[1]:
     puzzle = Chess(st.session_state.board_width, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
     components.html(
         puzzle.puzzle_board(),
@@ -102,11 +110,23 @@ with cols[0]:
     # if outcome:
     #     st.warning(f"Winner: { {True:'White',False:'Black'}.get(outcome.winner) }")
 
-with cols[1]:
-    with st.container():
-        records = [
-            f"##### {value['timestamp'].split('.')[0]} \n {value['side']} - {value.get('last_move','')}"
-                for key, value in st.session_state['moves'].items()
-        ]
-        # html( "<p>" + '\n\n'.join(records) + "</p>", scrolling=True)
-        stx.scrollableTextbox('\n\n'.join(records), height = 500, border=True)
+with cols[2]:
+    st.markdown(
+        """
+        <div style="margin-top: 7.5px;">  <!-- Adjust the top margin as needed -->
+            <img src="https://i.ibb.co/6Dh2QV4/gordon.png" alt="Gordon" style="width:100%">  <!-- Ensure the image path is correct -->
+        </div>
+        """, 
+        unsafe_allow_html=True
+    )
+
+    # Apply the custom CSS class to the scrollable textbox container
+    st.markdown(
+        '<div class="scrollable-textbox-top-margin">', 
+        unsafe_allow_html=True
+    )
+    records = ['MOVES\n------------------------------------------']
+    for key, value in list(st.session_state['moves'].items())[1:]:
+        records.append( ('Plyaer 1' if value['current_player'] == 'Player 2'else 'Player 2') + ' played ' + value['last_move'][-2:])
+    stx.scrollableTextbox('\n\n'.join(records), height=251, border=True)
+    st.markdown('</div>', unsafe_allow_html=True)

@@ -7,9 +7,9 @@ body {
     font-size: 24px;
   }
   
-  p {
+  /* p {
     margin-bottom: 10px;
-  }
+  } */
   
   a {
     color: #000000;
@@ -28,4 +28,8 @@ body {
   .dark-theme {
     background-color: #000000;
     color: #ffffff;
+  }
+
+  .scrollable-textbox-top-margin {
+    margin-top: 7.5px !important; /* Adjust this value to your liking */
   }

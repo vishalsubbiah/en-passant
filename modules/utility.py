@@ -31,4 +31,4 @@ def set_page(title='Chess', page_icon="♟️"):
 
     apply_css()
 
-    st.title('Streamlit Chessboard')
+    # st.title('En Passant AI')
