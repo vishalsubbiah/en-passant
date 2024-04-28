@@ -105,10 +105,24 @@ with cols[0]:
     #     st.warning(f"Winner: { {True:'White',False:'Black'}.get(outcome.winner) }")
 
 with cols[1]:
+    st.markdown(
+        """
+        <div style="margin-top: 7.5px;">  <!-- Adjust the top margin as needed -->
+            <img src="https://github.com/vishalsubbiah/pearvc_hackathon_chess_commentry/blob/vishal/integ_lichess/images.jpeg?raw=true" alt="Gordon" style="width:100%">  <!-- Ensure the image path is correct -->
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Apply the custom CSS class to the scrollable textbox container
+    st.markdown(
+        '<div class="scrollable-textbox-top-margin">',
+        unsafe_allow_html=True
+    )
     with st.container():
         records = ["MOVES\n--------------------------------"]
         records.append(error)
         # html( "<p>" + '\n\n'.join(records) + "</p>", scrolling=True)
         for key, value in list(st.session_state['moves'].items())[1:]:
-            records.append( ('Plyaer 1' if value['current_player'] == 'Player 2'else 'Player 2') + ' played ' + value['last_move'][-2:])
+            records.append( ('Player 1' if value['current_player'] == 'Player 2'else 'Player 2') + ' played ' + value['last_move'][-2:])
         stx.scrollableTextbox('\n\n'.join(records), height = 500, border=True)
