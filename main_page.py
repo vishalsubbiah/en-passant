@@ -127,6 +127,6 @@ with cols[2]:
     )
     records = ['MOVES\n------------------------------------------']
     for key, value in list(st.session_state['moves'].items())[1:]:
-        records.append( ('Plyaer 1' if value['current_player'] == 'Player 2'else 'Player 2') + ' played ' + value['last_move'][-2:])
-    stx.scrollableTextbox('\n\n'.join(records), height=251, border=True)
+        records.append( ('Player 1' if value['current_player'] == 'Player 2'else 'Player 2') + ' played ' + value['last_move'][-2:])
+    stx.scrollableTextbox('\n'.join(records), height=251, border=True)
     st.markdown('</div>', unsafe_allow_html=True)
