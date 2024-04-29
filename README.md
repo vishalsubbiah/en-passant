@@ -1,5 +1,19 @@
-# pearvc_hackathon_chess_commentry
+# En Passant - Chess Commentary for PearVC X OpenAI hackathon
 
-Run setup.sh to setup the python venv
+Run `bash setup.sh` to setup the python venv
 
-Add `OPENAI_API_KEY` to the .env file
+Create a .env file with the following entries:
+
+* `OPENAI_API_KEY`
+* `ELEVEN_LABS_API`
+* `GORDON_VOICE_ID` - voice id for commentator 1
+* `AZIZ_VOICE_ID` - voice id for commentator 2
+
+
+To run locally:
+
+`streamlit run main_page.py`
+
+
+Link to youtube demo:
+* https://www.youtube.com/watch?v=VkvmBz_oC80
