@@ -1,22 +1,29 @@
 from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env.
 from openai import OpenAI
+from groq import Groq
 from collections import deque
+import os
+
+clients = {
+    "openai" : OpenAI(),
+    "groq": Groq(api_key=os.environ.get("GROQ_API_KEY"))
+}
 
 class ChatApp:
     def __init__(
             self,
             conv_limit=30,
             model="gpt-4-turbo",
+            client="openai",
             persona=None,
             persona_freq=2
         ):
         self.conv_limit = conv_limit
         self.model = model
-        self.client = OpenAI()
+        self.client = clients[client]
         self.persona = persona
         self.persona_spot=-1
-
 
         self.messages_queue = deque(maxlen=self.conv_limit)
         self.move_count=1
@@ -50,7 +57,7 @@ class ChatApp:
         response = self.client.chat.completions.create(
             model=self.model,
             messages=[self.base_message, *self.messages_queue],
-            temperature=0,
+            temperature=0.7,
             max_tokens=128,
             top_p=1,
             frequency_penalty=0,

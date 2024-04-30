@@ -13,6 +13,9 @@ from modules.chess import Chess
 from modules.utility import set_page
 from modules.states import init_states
 
+from guardrails.hub import NSFWText
+from guardrails import Guard
+
 import os
 import datetime as dt
 
@@ -21,9 +24,10 @@ set_page(title='Chess', page_icon="♟️")
 init_states()
 if "chat_app" not in st.session_state:
     st.session_state.prev_data = ""
-    st.session_state.chat_app = ChatApp()
+    st.session_state.chat_app = ChatApp(client="groq", model="llama3-70b-8192")
     st.session_state.eleven_voice = ElevenVoice()
-st.session_state.board_width = 500
+    st.session_state.guard = Guard().use(NSFWText, threshold=0.8, validation_method="sentence", on_fail="exception")
+    st.session_state.board_width = 500
 
 # Get the info from current board after the user made the move.
 # The data will return the move, fen and the pgn.
@@ -59,21 +63,13 @@ if data is not None:
         st.session_state.prev_data = data["pgn"]
         print("inside if should match", f"{data=}", f"{st.session_state.prev_data=}")
         message, persona, output = st.session_state.chat_app.chat(pgn_entry)
-        from guardrails.hub import NSFWText
-        from guardrails import Guard
-
-        # Use the Guard with the validator
-        guard = Guard().use(
-            NSFWText, threshold=0.8, validation_method="sentence", on_fail="exception"
-        )
-
-        # Test passing response
 
         try:
-            guard.validate(output)
+            st.session_state.guard.validate(output)
         except Exception as e:
             error = str(e)
             print(e)
+            
         if persona=="Gordon Ramsey":
             voice_id = os.environ["GORDON_VOICE_ID"]
         elif persona=="Aziz Ansari":
