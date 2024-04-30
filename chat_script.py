@@ -5,11 +5,6 @@ from groq import Groq
 from collections import deque
 import os
 
-clients = {
-    "openai" : OpenAI(),
-    "groq": Groq(api_key=os.environ.get("GROQ_API_KEY"))
-}
-
 class ChatApp:
     def __init__(
             self,
@@ -19,6 +14,11 @@ class ChatApp:
             persona=None,
             persona_freq=2
         ):
+        clients = {
+            "openai" : OpenAI(),
+            "groq": Groq(api_key=os.environ.get("GROQ_API_KEY"))
+        }
+        
         self.conv_limit = conv_limit
         self.model = model
         self.client = clients[client]

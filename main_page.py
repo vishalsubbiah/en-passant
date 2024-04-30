@@ -6,7 +6,7 @@ from streamlit.components.v1 import html
 import chess
 import streamlit_scrollable_textbox as stx
 
-from gpt_script import ChatApp
+from chat_script import ChatApp
 from eleven_labs import ElevenVoice
 from st_bridge import bridge
 from modules.chess import Chess
@@ -24,7 +24,7 @@ set_page(title='Chess', page_icon="♟️")
 init_states()
 if "chat_app" not in st.session_state:
     st.session_state.prev_data = ""
-    st.session_state.chat_app = ChatApp(client="groq", model="llama3-70b-8192")
+    st.session_state.chat_app = ChatApp(client="groq", model="llama3-8b-8192")
     st.session_state.eleven_voice = ElevenVoice()
     st.session_state.guard = Guard().use(NSFWText, threshold=0.8, validation_method="sentence", on_fail="exception")
     st.session_state.board_width = 500
