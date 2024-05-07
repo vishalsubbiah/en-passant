@@ -31,12 +31,13 @@ Repeat the same process as Step 3 but for Gordon. Navigate to ElevenLabs -> Voic
 For each of the two voices, hover over the top right icon labeled "ID" to find the Voice ID for each voice.
 
 ### Step 6
-Fill in the following fields in the .env file:
+Create a .env file with the following entries:
 
 * `OPENAI_API_KEY` - OpenAI Key
+* `GROQ_API_KEY` - Groq Key (Optional if using Groq instead of OpenAI)
 * `ELEVEN_LABS_API` - Eleven Labs API Key
+* `AZIZ_VOICE_ID` - Voice ID for Aziz from ElevenLabs that you found on Step 3
 * `GORDON_VOICE_ID` - Voice ID for Gordon from ElevenLabs that you found on Step 4
-* `AZIZ_VOICE_ID` - Voice ID for Aziz from ElevenLabs that you found on Step 4
 
 ### Step 7
 Run the following command to run the application locally:
