@@ -35,6 +35,6 @@ class ElevenVoice:
         playsound('output.mp3')
 
 if __name__ == "__main__":
-    gordon_voice_id = os.environ["GORDON_VOICE_ID"]
+    CELEBRITY_VOICE_ID_1 = os.environ["CELEBRITY_VOICE_ID_1"]
     voice = ElevenVoice()
-    voice.generate_and_play_audio("Does this work?", gordon_voice_id)
+    voice.generate_and_play_audio("Does this work?", CELEBRITY_VOICE_ID_1)

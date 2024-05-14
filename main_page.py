@@ -71,9 +71,9 @@ if data is not None:
             print(e)
             
         if persona=="Gordon Ramsey":
-            voice_id = os.environ["GORDON_VOICE_ID"]
+            voice_id = os.environ["CELEBRITY_VOICE_ID_1"]
         elif persona=="Aziz Ansari":
-            voice_id = os.environ["AZIZ_VOICE_ID"]
+            voice_id = os.environ["CELEBRITY_VOICE_ID_2"]
         st.session_state.eleven_voice.generate_and_play_audio(output, voice_id)
 
 if st.button('start new game'):
