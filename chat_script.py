@@ -9,7 +9,7 @@ class ChatApp:
     def __init__(
             self,
             conv_limit=30,
-            model="gpt-4-turbo",
+            model="gpt-4o",
             client="openai",
             persona=None,
             persona_freq=2
